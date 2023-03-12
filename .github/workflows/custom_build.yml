@@ -106,9 +106,9 @@ jobs:
           fi
           
           ./scripts/build.sh --arch ${{ matrix.arch }} --release-type ${opts[RELEASE_TYPE,${{ inputs.release_type }}]} --magisk-ver $MAGISK_VER --gapps-brand ${{ inputs.gapps_brand }} --gapps-variant ${opts[GAPPS_VAR,${{ inputs.gapps_var }}]} --root-sol $ROOT_SOL --compress-format ${opts[COMPRESSION,${{ inputs.compression }}]} ${opts[REMOVE_AMAZON,${{ inputs.remove_amazon }}]}
-
       - name: Upload Artifact 🤌
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.wsa.outputs.artifact }}
+          name: |
+            ${{ steps.wsa.outputs.artifact }}
           path: ./output
