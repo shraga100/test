@@ -13,6 +13,9 @@ jobs:
       - name: Dependencies
         run: |
           pip3 install beautifulsoup4 lxml
+      - name: Create branch if not found
+        run: |
+          git checkout -f update || git switch --discard-changes --orphan update
       - name: Get app version
         shell: python
         run: |
@@ -27,43 +30,66 @@ jobs:
           }, verify=False) # source site has expired cert
           html = BeautifulSoup(res.content, "lxml")
           latestver = html.find("a", string=re.compile("MicrosoftCorporationII\.WindowsSubsystemForAndroid_.*\.msixbundle")).text
+          latestver = latestver.replace('MicrosoftCorporationII.WindowsSubsystemForAndroid_', '')
+          latestver = latestver.replace('_neutral_~_8wekyb3d8bbwe.msixbundle', '')
           currentver = requests.get(f"https://raw.githubusercontent.com/${{github.repository}}/update/wsa.appversion").text
+          latestver = latestver.replace('\n', '')
+          currentver = currentver.replace('\n', '')
           build = False
           msg = ""
           if currentver != latestver:
               build = True
-              msg="Update WSA to newest version"
-              file = open('wsa.appversion', 'w')
-              file.write(latestver)
-              file.close()
+              msg="Update WSA Version from `v" + currentver + "` to `v" + latestver + "`"
+          file = open('wsa.appversion', 'w')
+          file.write(latestver)
+          file.close()
           currentver = requests.get(f"https://raw.githubusercontent.com/${{github.repository}}/update/magisk.appversion").text
           latestver = json.loads(requests.get(f"https://github.com/topjohnwu/magisk-files/raw/master/stable.json").content)['magisk']['version']
+          latestver = latestver.replace('\n', '')
+          currentver = currentver.replace('\n', '')
           if currentver != latestver:
               build = True
-              msg = "Update to Magisk v" + latestver
-              file = open('magisk.appversion', 'w')
-              file.write(latestver)
-              file.close()
-              
+              msg="Update Magisk Version from `v" + currentver + "` to `v" + latestver + "`"
+          file = open('magisk.appversion', 'w')
+          file.write(latestver)
+          file.close()
+          currentver = requests.get(f"https://raw.githubusercontent.com/${{github.repository}}/update/gapps.appversion").text
+          latestver = json.loads(requests.get(f"https://api.github.com/repos/s1204IT/MindTheGappsBuilder/releases/latest").content)['name']
+          latestver = latestver.replace('\n', '')
+          currentver = currentver.replace('\n', '')
+          if currentver != latestver:
+              build = True
+              msg="Update MindTheGapps Version from `v" + currentver + "` to `v" + latestver + "`"
+          file = open('gapps.appversion', 'w')
+          file.write(latestver)
+          file.close()
           if (build):
               with open(env_file, "a") as wr:
                   wr.write("SHOULD_BUILD=yes\nMSG=" + msg)
           else:
               with open(env_file, "a") as wr:
-                  wr.write("SHOULD_BUILD=no" + msg)
-      
-      - name: Create branch if not found
-        if: ${{ env.SHOULD_BUILD == 'yes'}}
-        run: |
-          git checkout -f update || git switch --discard-changes --orphan update
-
-      - uses: stefanzweifel/git-auto-commit-action@v4
+                  wr.write("SHOULD_BUILD=no")
+                  
+      - uses: stefanzweifel/git-auto-commit-action@v4.16.0
         if: ${{ env.SHOULD_BUILD == 'yes'}}
         with:
           branch: update
-          skip_checkout: true
+          push_options: '--force'
           file_pattern: '*.appversion'
           commit_message: ${{ env.MSG }}
+          create_branch: true
+          
+      - name: Prepare release tag
+        if: ${{ env.SHOULD_BUILD == 'yes'}}
+        id: date
+        run: echo "date=$(date +'v%Y-%m-%d')" >> $GITHUB_OUTPUT
+        
+      - name: Add text format to release
+        if: ${{ env.SHOULD_BUILD == 'yes'}}
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          tag_name: ${{ steps.date.outputs.date }}
+          body: "# Changelog\n### ${{ env.MSG }}\n### SHA256 Checksum\n```"
 
     outputs:
       SHOULD_BUILD: ${{ env.SHOULD_BUILD }}
