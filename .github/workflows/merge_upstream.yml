@@ -27,14 +27,15 @@ jobs:
       - name: Compare changes
         id: compare
         run: |
-          git diff --name-only HEAD origin/main
-          echo "changes=$(git diff --name-only HEAD origin/main  | tr '\n' ' ')" >> $GITHUB_OUTPUT
+          echo "changes=$(git diff --name-only HEAD origin/main  | grep -v '.github/workflows/build.yml' | grep -v '.github/workflows/update.yml' |  grep -v '.github/workflows/custom_build.yml' | grep -v '.github/workflows/merge_upstream.yml' | tr '\n' ' ')" >> $GITHUB_OUTPUT
           
       - name: Push all changes
         if: ${{ steps.compare.outputs.changes != '' }}
         run: |
-          git push origin main
-
+            git diff --name-only HEAD origin/main | grep -v '.github/workflows/build.yml' | grep -v '.github/workflows/update.yml' |  grep -v '.github/workflows/custom_build.yml' | grep -v '.github/workflows/merge_upstream.yml' | sed 's/.*/"&"/' | xargs git checkout main
+            git commit -m 'Merge upstream'
+            git push
+            
       - name: Trigger build
         uses: peter-evans/repository-dispatch@v2.1.1
         if: ${{ steps.compare.outputs.changes != '' }}
