@@ -37,61 +37,43 @@
 
 
 ---
-#### **6. Open [this link](https://github.com/settings/tokens/new) in new tab, then follow the step below. FINALLY, SCROLL DOWN AND CLICK GENERATE TOKEN**
-![image](https://user-images.githubusercontent.com/70064328/231184720-0d3b4ce7-0b82-4b1f-b337-5f0fd0ceb632.png)
-
-
----
-#### **7. The key will appear. Then click the copy button at right side of the key.**
-![image](https://user-images.githubusercontent.com/70064328/231189492-cf3b407e-708b-4224-ba4e-11f3e27012a1.png)
----
-
----
-#### **8. Now, back to your reporistory **Setting** tab, and open Secret and Variable, then click Action. Next click **New reporistory secret** button**
-![image](https://user-images.githubusercontent.com/70064328/231191605-1e3c4b53-6d17-49f5-8e7f-c752ae12aee8.png)
-
----
-#### **9. In the name boxes, type PAT. Next, paste your copied Secret key to Secret boxes, then click **Add Secrets** button**
-![image](https://user-images.githubusercontent.com/70064328/231192376-16aa194c-07ae-4262-857f-d9d86701a110.png)
----
-
-
-#### **10. Now, Go to the **Action** tab**
+#### **6. Now, Go to the **Action** tab**
 
 ![CvYhP0B0CI](https://user-images.githubusercontent.com/68516357/222221960-f48ab9c3-eb77-4cb0-b932-5cd343381048.png)
 
     
 ---
-#### **11. In the left sidebar, click the **Custom Build** workflow.**
+#### **7. In the left sidebar, click the **Custom Build** workflow.**
     
 ![image](https://user-images.githubusercontent.com/68516357/222221307-8a4571d2-ac3e-410b-b999-0eb62b14d8d5.png)
     
 ---
-#### **12. Above the list of workflow runs, select **Run workflow****
+#### **8. Above the list of workflow runs, select **Run workflow****
     
 ![image](https://user-images.githubusercontent.com/68516357/222222850-f991890c-5a80-4cc2-b83d-0ef35c24a79e.png)
     
 ---
-#### **13. Select your desired options such as ***Magisk Version***, ***WSA Release Channel + WSA Archetecture*** , ***GApps Varient*** and ***Compression Format*** then click **Run workflow****
+#### **9. Select your desired options such as ***Magisk Version***, ***WSA Release Channel + WSA Archetecture*** , ***GApps Varient*** and ***Compression Format*** then click **Run workflow****
     
 ![image](https://user-images.githubusercontent.com/68516357/222224185-abcfa0cf-c8c6-46e3-bc38-871c968b86f2.png)
     
 ---    
-#### **14. Wait for the action to complete and download the artifact**
+#### **10. Wait for the action to complete and download the artifact**
 
 **DO NOT download it via multithread downloaders like IDM**
 
 ![image](https://user-images.githubusercontent.com/68516357/222224469-5748b78a-158e-46ff-9f65-317dbb519aac.png)
 
 ---
-#### **15. Install like normal using [the instructions](https://github.com/YT-Advanced/WSA-Script#--installation) in this repository** and most important of all....
+#### **11. Install like normal using [the instructions](https://github.com/YT-Advanced/WSA-Script#--installation) in this repository** and most important of all....
 
 </details>
+
 
 ## Requirements
 |Component|     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Windows_11_logo.svg" style="width: 200px;"/>|  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Windows_10_Logo.svg" style="width: 200px;"/>     |
 |-----------------|-----------------------|-----------------------|
-|<img style="float: right;" src="https://img.icons8.com/fluency/96/null/windows-update--v1.png" width="60" height="60"/><h4>Windows Build Number<h4>|Windows™ 11: Build 22000.526 or higher.|Windows™ 10: 22H2 10.0.19045.2311 or higher. <br /> <br /> You must install [KB5014032](https://www.catalog.update.microsoft.com/Search.aspx?q=KB5014032) then install [KB5022834](https://www.catalog.update.microsoft.com/Search.aspx?q=KB5022834) to use WSA on these older Windows 10 builds <br /> <br /> |
+|<img style="float: right;" src="https://img.icons8.com/fluency/96/null/windows-update--v1.png" width="60" height="60"/><h4>Windows Build Number<h4>|Windows™ 11: Build 22000.526 or higher.|Windows™ 10: 20H2 Build 19042.2604 or higher. <br /> <br /> You must install [KB5014032](https://www.catalog.update.microsoft.com/Search.aspx?q=KB5014032) then install [KB5022834](https://www.catalog.update.microsoft.com/Search.aspx?q=KB5022834) to use WSA on these older Windows 10 builds <br /> <br /> |
 |<img style="float: right;" src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/66/null/external-RAM-technology-and-devices-smashingstocks-flat-smashing-stocks.png" width="60" height="60"/><h4>RAM<h4>|6 GB (not recommended), 8 GB (minimum) and 16 GB (recommended).|6 GB (not recommended), 8 GB (minimum) and 16 GB (recommended).|
 |<img style="float: right;" src="https://img.icons8.com/3d-fluency/94/null/electronics.png" width="60" height="60"/><h4>Processor<h4>|Your PC should meet the basic Windows™ 11 requirements i.e Core i3 8th Gen, Ryzen 3000, Snapdragon 8c, or above.|N/A </br></br> This is a bit of a hit or miss, but it is highly recommended that your processor is listed in the [supported CPU lists for Windows 11 requirements](https://learn.microsoft.com/en-gb/windows-hardware/design/minimum/windows-processor-requirements)
 |<img style="float: right;" src="https://img.icons8.com/3d-fluency/94/null/video-card.png" width="60" height="60"/><h4>GPU<h4>|- Any compatible Intel, AMD or Nvidia GPU. <br /> - GPU Performance may vary depending on its compatibility with Windows Subsystem For Android™  <br />|- Any compatible Intel, AMD or Nvidia GPU. <br /> - GPU Performance may vary depending on its compatibility with Windows Subsystem For Android™  <br />|
